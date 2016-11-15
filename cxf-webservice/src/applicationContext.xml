@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="  
+    http://www.springframework.org/schema/beans   
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+    http://www.springframework.org/schema/mvc   
+    http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd 
+    http://www.springframework.org/schema/context   
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	
+    <!-- 引入jdbc配置文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties" />
+	
+	<!--创建jdbc数据源 -->
+    <bean id="dataSource"  
+        class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">  
+        <property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+    </bean> 
+  
+  	
+    <!-- 事务管理 : DataSourceTransactionManager dataSource:引用上面定义的数据源  -->  
+    <bean id="transactionManager"  
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+        <property name="dataSource" ref="dataSource"></property>  
+    </bean>
+    
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+     <bean id="userDao" class="com.cxf.dao.UserDaoImpl">
+            <property name="jdbcTemplate" ref="jdbcTemplate"/>  
+     </bean>  
+     <bean id="bCert60lnzDao" class="com.cxf.dao.BCert60lnzDaoImpl">
+            <property name="jdbcTemplate" ref="jdbcTemplate"/>  
+     </bean>  
+     <bean id="bCert70lnzDao" class="com.cxf.dao.BCert70lnzDaoImpl">
+            <property name="jdbcTemplate" ref="jdbcTemplate"/>  
+     </bean>             
+     <bean id="bcertSfzDao" class="com.cxf.dao.BCertSfzDaoImpl">
+            <property name="jdbcTemplate" ref="jdbcTemplate"/>  
+     </bean>  
+     <bean id="bCertEhsyfwzDao" class="com.cxf.dao.BCertEhsyfwzDaoImpl">
+            <property name="jdbcTemplate" ref="jdbcTemplate"/>  
+     </bean>    
+
+
+<bean id="bCertLdrkhyzmDao" class="com.cxf.dao.BCertLdrkhyzmDaoImpl">
+            <property name="jdbcTemplate" ref="jdbcTemplate"/>  
+     
+     </bean>             
+ 	<bean id="bCertYhsyfwzDao" class="com.cxf.dao.BCertYhsyfwzDaoImpl">
+            <property name="jdbcTemplate" ref="jdbcTemplate"/>  
+     
+     </bean> 
+     <bean id="bCertGsyyzzDao" class="com.cxf.dao.BCertGsyyzzDaoImpl">
+            <property name="jdbcTemplate" ref="jdbcTemplate"/>  
+     
+     </bean>  
+      	<bean id="bCertHkbMainDao" class="com.cxf.dao.BCertHkbMainDaoImpl">
+            <property name="jdbcTemplate" ref="jdbcTemplate"/>  
+     
+     </bean> 
+     <bean id="bCertHkbCzrkDao" class="com.cxf.dao.BCertHkbCzrkDaoImpl">
+            <property name="jdbcTemplate" ref="jdbcTemplate"/>  
+     
+     </bean> 
+     
+      <bean id="bCertJhzDao" class="com.cxf.dao.BCertJhzDaoImpl">
+            <property name="jdbcTemplate" ref="jdbcTemplate"/>  
+     </bean> 
+</beans>  
